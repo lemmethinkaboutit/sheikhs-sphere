@@ -9,15 +9,12 @@ const meta = {
 
 <PageLayout meta={meta}>
 
-  <!-- Header -->
   <h1 class="title mb-4">Ask Hadi</h1>
   <p class="text-muted text-sm mb-16">The human is real. The AI is fast. Both know the same stuff.</p>
 
-  <!-- Chat section -->
   <section class="mb-16">
     <div class="border border-muted/20 rounded-xl overflow-hidden">
 
-      <!-- Chat header -->
       <div class="border-b border-muted/20 px-5 py-4 flex items-center gap-3">
         <div class="relative">
           <img src="/profile.png" alt="Hadi" class="w-9 h-9 rounded-full object-cover" />
@@ -29,9 +26,7 @@ const meta = {
         </div>
       </div>
 
-      <!-- Messages area -->
       <div id="chat-messages" class="px-5 py-6 space-y-4 min-h-64 max-h-96 overflow-y-auto">
-        <!-- Intro message -->
         <div class="flex gap-3 items-start">
           <img src="/profile.png" alt="Hadi" class="w-7 h-7 rounded-full object-cover flex-shrink-0 mt-0.5" />
           <div class="bg-muted/10 rounded-2xl rounded-tl-sm px-4 py-3 max-w-sm">
@@ -52,7 +47,6 @@ const meta = {
         </div>
       </div>
 
-      <!-- Typing indicator (hidden by default) -->
       <div id="typing-indicator" class="hidden px-5 pb-2">
         <div class="flex gap-3 items-center">
           <img src="/profile.png" alt="Hadi" class="w-7 h-7 rounded-full object-cover flex-shrink-0" />
@@ -66,7 +60,6 @@ const meta = {
         </div>
       </div>
 
-      <!-- Input area -->
       <div class="border-t border-muted/20 px-4 py-3 flex gap-3 items-end">
         <textarea
           id="chat-input"
@@ -84,7 +77,6 @@ const meta = {
 
     </div>
 
-    <!-- Suggested questions -->
     <div class="mt-4 flex flex-wrap gap-2">
       {[
         "What's your ServiceNow experience?",
@@ -103,10 +95,8 @@ const meta = {
     </div>
   </section>
 
-  <!-- Divider -->
   <div class="border-t border-dashed border-muted/30 mb-16"></div>
 
-  <!-- Contact section -->
   <section class="mb-16">
     <h2 class="title text-xl mb-2">The human version</h2>
     <p class="text-muted text-sm mb-8">For when you want a reply that took actual thought.</p>
@@ -157,7 +147,6 @@ const meta = {
     </div>
   </section>
 
-  <!-- Availability -->
   <section class="border border-accent/20 rounded-xl p-6 bg-accent/5">
     <div class="flex items-start gap-3">
       <span class="w-2 h-2 rounded-full bg-accent mt-1.5 flex-shrink-0 animate-pulse"></span>
@@ -174,18 +163,18 @@ const meta = {
 </PageLayout>
 
 <script>
-
 const k1 = "gsk_sRMSpVlP9hSRlwHElZFtWGdyb3F";
 const k2 = "YKFPVVoqNyaJQaHpZcYppqid3";
 const GROQ_API_KEY = k1 + k2;
+const MODEL = "llama-3.3-70b-versatile";
 
-const SYSTEM_PROMPT = `You are Hadi — the AI version of Abdul Hadi Sheikh, running on his personal portfolio website sheikhs-sphere.vercel.app.
+const SYSTEM_PROMPT = `You are Hadi — the AI version of Abdul Hadi Sheikh, running on his personal portfolio website.
 
 WHO YOU ARE:
-Abdul Hadi Sheikh. 28 years old. Based in Karachi, Pakistan. ServiceNow CSA and CIS-SPM certified. MBA Marketing from Iqra University. Currently job hunting — targeting Systems Limited, EY Pakistan, IBM Pakistan, and Inbox Business Technologies for ServiceNow roles. Also open to remote EU BA work at €25/hour.
+Abdul Hadi Sheikh. 28 years old. Based in Karachi, Pakistan. ServiceNow CSA and CIS-SPM certified. MBA Marketing from Iqra University. Currently job hunting — targeting Systems Limited, EY Pakistan, IBM Pakistan, and Inbox Business Technologies for ServiceNow roles. Also open to remote EU BA work at €35/hour.
 
 YOUR BACKGROUND:
-5 years across sales, email marketing, SEO, industrial marketing at Maple Leaf Cement, and now ServiceNow platform implementation. You are a playful, positive, self-aware person. Dark humor. Fast talker. Short sentences. More meaning, less words. Pakistani English with South Asian rhythm. You laugh at yourself before others can.
+5 years across sales, email marketing, SEO, industrial marketing at Maple Leaf Cement, and now ServiceNow platform implementation. Playful, positive, self-aware. Dark humor. Fast talker. Short sentences. More meaning, less words. Pakistani English with South Asian rhythm. Laugh at yourself before others can.
 
 YOUR WORK HISTORY:
 1. Transdata Solutions (2020) — cold calling internship. Learned to listen not pitch. Pattern interrupt technique. Chris Voss and SPIN Selling.
@@ -198,52 +187,41 @@ YOUR WORK HISTORY:
 THE ACME SPM CASE STUDY:
 Built an end-to-end ServiceNow SPM implementation on a PDI for fictional company Acme Corporation. $1.55M portfolio. Three programs: Cybersecurity Expansion ($500K, Sarah Ahmed), Cloud Infrastructure Migration ($750K, Ali Hassan), ServiceNow Consulting Practice ($300K, Maria Khan). Nine projects. 17 users. 9 role-based groups — zero direct role assignments. Five phases: Foundation, Demand Intake, Project Execution, Resource Management, Executive Reporting. Key demand DMND0001101 — Zero Trust Security — $750K cost, $1.5M benefit, 100% ROI. Generated project PRJ0010001. pps_resource group type is the most commonly missed SPM configuration detail.
 
-YOUR PERSONALITY RULES:
+PERSONALITY RULES:
 - Short sentences. Punchy. Direct.
 - Dark humor but warm underneath.
 - Never corporate speak.
 - Laugh at yourself.
 - Answer like you're talking to someone smart.
-- If asked a joke — actually tell a good one. Don't be meta about it.
+- If asked a joke — actually tell a good one.
 - If asked why someone should hire you — be honest and specific, not salesy.
-- Never say "I'd be happy to help" or "Certainly!" — that's not you.
-- If you don't know something, say so. Don't make things up.
-- Keep answers concise unless the question genuinely needs depth.`;
+- Never say "I'd be happy to help" or "Certainly!"
+- If you don't know something, say so.
+- Keep answers concise unless depth is needed.`;
 
 const messagesHistory = [];
 const chatMessages = document.getElementById('chat-messages');
-const chatInput = document.getElementById('chat-input') as HTMLTextAreaElement;
+const chatInput = document.getElementById('chat-input');
 const sendBtn = document.getElementById('send-btn');
 const typingIndicator = document.getElementById('typing-indicator');
 
-function addMessage(role: string, content: string) {
+function addMessage(role, content) {
   const wrapper = document.createElement('div');
-  
   if (role === 'user') {
     wrapper.className = 'flex justify-end';
-    wrapper.innerHTML = `
-      <div class="bg-accent/15 border border-accent/20 rounded-2xl rounded-tr-sm px-4 py-3 max-w-sm">
-        <p class="text-sm leading-relaxed">${content}</p>
-      </div>`;
+    wrapper.innerHTML = `<div class="bg-accent/15 border border-accent/20 rounded-2xl rounded-tr-sm px-4 py-3 max-w-sm"><p class="text-sm leading-relaxed">${content}</p></div>`;
   } else {
     wrapper.className = 'flex gap-3 items-start';
-    wrapper.innerHTML = `
-      <img src="/profile.png" alt="Hadi" class="w-7 h-7 rounded-full object-cover flex-shrink-0 mt-0.5" />
-      <div class="bg-muted/10 rounded-2xl rounded-tl-sm px-4 py-3 max-w-sm">
-        <p class="text-sm leading-relaxed">${content.replace(/\n/g, '<br>')}</p>
-      </div>`;
+    wrapper.innerHTML = `<img src="/profile.png" alt="Hadi" class="w-7 h-7 rounded-full object-cover flex-shrink-0 mt-0.5" /><div class="bg-muted/10 rounded-2xl rounded-tl-sm px-4 py-3 max-w-sm"><p class="text-sm leading-relaxed">${content.replace(/\n/g, '<br>')}</p></div>`;
   }
-  
   chatMessages.appendChild(wrapper);
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-async function sendMessage(userMessage: string) {
+async function sendMessage(userMessage) {
   if (!userMessage.trim()) return;
-  
   addMessage('user', userMessage);
   messagesHistory.push({ role: 'user', content: userMessage });
-  
   chatInput.value = '';
   chatInput.style.height = 'auto';
   typingIndicator.classList.remove('hidden');
@@ -270,28 +248,27 @@ async function sendMessage(userMessage: string) {
 
     const data = await response.json();
     const reply = data.choices[0].message.content;
-    
     messagesHistory.push({ role: 'assistant', content: reply });
     typingIndicator.classList.add('hidden');
     addMessage('assistant', reply);
   } catch (error) {
     typingIndicator.classList.add('hidden');
-    addMessage('assistant', "Something broke. Probably the internet. Try again.");
+    addMessage('assistant', 'Error: ' + error.message);
   }
-  
+
   sendBtn.removeAttribute('disabled');
 }
 
-sendBtn?.addEventListener('click', () => sendMessage(chatInput.value));
+sendBtn.addEventListener('click', () => sendMessage(chatInput.value));
 
-chatInput?.addEventListener('keydown', (e: KeyboardEvent) => {
+chatInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && !e.shiftKey) {
     e.preventDefault();
     sendMessage(chatInput.value);
   }
 });
 
-chatInput?.addEventListener('input', () => {
+chatInput.addEventListener('input', () => {
   chatInput.style.height = 'auto';
   chatInput.style.height = chatInput.scrollHeight + 'px';
 });
