@@ -1,0 +1,301 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+
+const meta = {
+	description: "Ask Hadi anything — ServiceNow, marketing, career, or just say hi. Also where you find all the contact details.",
+	title: "Ask Hadi",
+};
+---
+
+<PageLayout meta={meta}>
+
+  <!-- Header -->
+  <h1 class="title mb-4">Ask Hadi</h1>
+  <p class="text-muted text-sm mb-16">The human is real. The AI is fast. Both know the same stuff.</p>
+
+  <!-- Chat section -->
+  <section class="mb-16">
+    <div class="border border-muted/20 rounded-xl overflow-hidden">
+
+      <!-- Chat header -->
+      <div class="border-b border-muted/20 px-5 py-4 flex items-center gap-3">
+        <div class="relative">
+          <img src="/profile.png" alt="Hadi" class="w-9 h-9 rounded-full object-cover" />
+          <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-accent rounded-full border-2 border-global-bg"></span>
+        </div>
+        <div>
+          <p class="text-sm font-semibold">Hadi</p>
+          <p class="text-xs text-muted">Powered by Llama 3.3 · Usually faster than email</p>
+        </div>
+      </div>
+
+      <!-- Messages area -->
+      <div id="chat-messages" class="px-5 py-6 space-y-4 min-h-64 max-h-96 overflow-y-auto">
+        <!-- Intro message -->
+        <div class="flex gap-3 items-start">
+          <img src="/profile.png" alt="Hadi" class="w-7 h-7 rounded-full object-cover flex-shrink-0 mt-0.5" />
+          <div class="bg-muted/10 rounded-2xl rounded-tl-sm px-4 py-3 max-w-sm">
+            <p class="text-sm leading-relaxed">Go on. Click me. I don't bite.</p>
+          </div>
+        </div>
+        <div class="flex gap-3 items-start">
+          <img src="/profile.png" alt="Hadi" class="w-7 h-7 rounded-full object-cover flex-shrink-0 mt-0.5" />
+          <div class="bg-muted/10 rounded-2xl rounded-tl-sm px-4 py-3 max-w-sm">
+            <p class="text-sm leading-relaxed">I've been trained with awesome jokes. Which you will never know if you don't ask.</p>
+          </div>
+        </div>
+        <div class="flex gap-3 items-start">
+          <img src="/profile.png" alt="Hadi" class="w-7 h-7 rounded-full object-cover flex-shrink-0 mt-0.5" />
+          <div class="bg-muted/10 rounded-2xl rounded-tl-sm px-4 py-3 max-w-sm">
+            <p class="text-sm leading-relaxed">Ask me about ServiceNow, my work history, the Acme case study, why I left cement, or literally anything else. Fair warning — I have opinions.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typing indicator (hidden by default) -->
+      <div id="typing-indicator" class="hidden px-5 pb-2">
+        <div class="flex gap-3 items-center">
+          <img src="/profile.png" alt="Hadi" class="w-7 h-7 rounded-full object-cover flex-shrink-0" />
+          <div class="bg-muted/10 rounded-2xl rounded-tl-sm px-4 py-3">
+            <div class="flex gap-1 items-center">
+              <span class="w-1.5 h-1.5 bg-muted rounded-full animate-bounce" style="animation-delay: 0ms"></span>
+              <span class="w-1.5 h-1.5 bg-muted rounded-full animate-bounce" style="animation-delay: 150ms"></span>
+              <span class="w-1.5 h-1.5 bg-muted rounded-full animate-bounce" style="animation-delay: 300ms"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input area -->
+      <div class="border-t border-muted/20 px-4 py-3 flex gap-3 items-end">
+        <textarea
+          id="chat-input"
+          placeholder="Ask anything..."
+          rows="1"
+          class="flex-1 bg-transparent text-sm resize-none outline-none placeholder:text-muted/50 py-1 max-h-32"
+        ></textarea>
+        <button
+          id="send-btn"
+          class="flex-shrink-0 text-accent hover:text-global-text transition-colors text-xs font-semibold px-3 py-1.5 border border-accent/30 hover:border-accent rounded-lg"
+        >
+          Send
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Suggested questions -->
+    <div class="mt-4 flex flex-wrap gap-2">
+      {[
+        "What's your ServiceNow experience?",
+        "Tell me about the Acme case study",
+        "Why should I hire you?",
+        "What did you learn at Maple Leaf?",
+        "Tell me a joke",
+      ].map(q => (
+        <button
+          class="suggested-q text-xs px-3 py-1.5 rounded-full border border-muted/20 text-muted hover:border-accent hover:text-accent transition-colors"
+          data-question={q}
+        >
+          {q}
+        </button>
+      ))}
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="border-t border-dashed border-muted/30 mb-16"></div>
+
+  <!-- Contact section -->
+  <section class="mb-16">
+    <h2 class="title text-xl mb-2">The human version</h2>
+    <p class="text-muted text-sm mb-8">For when you want a reply that took actual thought.</p>
+
+    <div class="space-y-4">
+
+      <a href="https://www.linkedin.com/in/call-me-abdul/" target="_blank" rel="noreferrer"
+        class="flex items-center gap-4 p-4 border border-muted/20 rounded-xl hover:border-accent transition-colors group">
+        <div class="w-10 h-10 rounded-lg bg-muted/10 flex items-center justify-center flex-shrink-0">
+          <svg class="w-5 h-5 text-muted group-hover:text-accent transition-colors" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          </svg>
+        </div>
+        <div>
+          <p class="text-sm font-semibold">LinkedIn</p>
+          <p class="text-xs text-muted">linkedin.com/in/call-me-abdul</p>
+        </div>
+        <span class="ml-auto text-xs text-muted group-hover:text-accent transition-colors">→</span>
+      </a>
+
+      <a href="mailto:abdulhadisheikh@outlook.com"
+        class="flex items-center gap-4 p-4 border border-muted/20 rounded-xl hover:border-accent transition-colors group">
+        <div class="w-10 h-10 rounded-lg bg-muted/10 flex items-center justify-center flex-shrink-0">
+          <svg class="w-5 h-5 text-muted group-hover:text-accent transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+          </svg>
+        </div>
+        <div>
+          <p class="text-sm font-semibold">Email</p>
+          <p class="text-xs text-muted">abdulhadisheikh@outlook.com</p>
+        </div>
+        <span class="ml-auto text-xs text-muted group-hover:text-accent transition-colors">→</span>
+      </a>
+
+      <div class="flex items-center gap-4 p-4 border border-muted/20 rounded-xl">
+        <div class="w-10 h-10 rounded-lg bg-muted/10 flex items-center justify-center flex-shrink-0">
+          <svg class="w-5 h-5 text-muted" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+          </svg>
+        </div>
+        <div>
+          <p class="text-sm font-semibold">Location</p>
+          <p class="text-xs text-muted">Karachi, Pakistan · Open to remote EU roles</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Availability -->
+  <section class="border border-accent/20 rounded-xl p-6 bg-accent/5">
+    <div class="flex items-start gap-3">
+      <span class="w-2 h-2 rounded-full bg-accent mt-1.5 flex-shrink-0 animate-pulse"></span>
+      <div>
+        <p class="text-sm font-semibold mb-1">Currently available</p>
+        <p class="text-xs text-muted leading-relaxed">
+          Targeting ServiceNow roles at Systems Limited, EY Pakistan, IBM Pakistan, and Inbox Business Technologies.
+          Also open to remote EU BA work. ServiceNow CSA · CIS-SPM · MBA Marketing.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</PageLayout>
+
+<script>
+
+const SYSTEM_PROMPT = `You are Hadi — the AI version of Abdul Hadi Sheikh, running on his personal portfolio website sheikhs-sphere.vercel.app.
+
+WHO YOU ARE:
+Abdul Hadi Sheikh. 28 years old. Based in Karachi, Pakistan. ServiceNow CSA and CIS-SPM certified. MBA Marketing from Iqra University. Currently job hunting — targeting Systems Limited, EY Pakistan, IBM Pakistan, and Inbox Business Technologies for ServiceNow roles. Also open to remote EU BA work at €25/hour.
+
+YOUR BACKGROUND:
+5 years across sales, email marketing, SEO, industrial marketing at Maple Leaf Cement, and now ServiceNow platform implementation. You are a playful, positive, self-aware person. Dark humor. Fast talker. Short sentences. More meaning, less words. Pakistani English with South Asian rhythm. You laugh at yourself before others can.
+
+YOUR WORK HISTORY:
+1. Transdata Solutions (2020) — cold calling internship. Learned to listen not pitch. Pattern interrupt technique. Chris Voss and SPIN Selling.
+2. Team Adver (2022) — apprenticeship at a chaotic agency. Smart work beats hard work. Philip Kotler and Byron Sharp.
+3. Curve Digital (2024) — email marketing specialist. Mass email operation. Domain warming. Deliverability. Seth Godin and Cialdini.
+4. Centric DxB (2024) — SEO specialist. Off-page SEO. Backlinks. The waterfall technique. Ahrefs. Brian Dean.
+5. Maple Leaf Cement (2025) — Assistant Manager Marketing. Push marketing vs digital. Five buyer types. Token card system. Fighting misinformation with demonstration.
+6. ServiceNow (2025-2026) — CSA and CIS-SPM certified. Built complete SPM implementation for Acme Corporation.
+
+THE ACME SPM CASE STUDY:
+Built an end-to-end ServiceNow SPM implementation on a PDI for fictional company Acme Corporation. $1.55M portfolio. Three programs: Cybersecurity Expansion ($500K, Sarah Ahmed), Cloud Infrastructure Migration ($750K, Ali Hassan), ServiceNow Consulting Practice ($300K, Maria Khan). Nine projects. 17 users. 9 role-based groups — zero direct role assignments. Five phases: Foundation, Demand Intake, Project Execution, Resource Management, Executive Reporting. Key demand DMND0001101 — Zero Trust Security — $750K cost, $1.5M benefit, 100% ROI. Generated project PRJ0010001. pps_resource group type is the most commonly missed SPM configuration detail.
+
+YOUR PERSONALITY RULES:
+- Short sentences. Punchy. Direct.
+- Dark humor but warm underneath.
+- Never corporate speak.
+- Laugh at yourself.
+- Answer like you're talking to someone smart.
+- If asked a joke — actually tell a good one. Don't be meta about it.
+- If asked why someone should hire you — be honest and specific, not salesy.
+- Never say "I'd be happy to help" or "Certainly!" — that's not you.
+- If you don't know something, say so. Don't make things up.
+- Keep answers concise unless the question genuinely needs depth.`;
+
+const messagesHistory = [];
+const chatMessages = document.getElementById('chat-messages');
+const chatInput = document.getElementById('chat-input') as HTMLTextAreaElement;
+const sendBtn = document.getElementById('send-btn');
+const typingIndicator = document.getElementById('typing-indicator');
+
+function addMessage(role: string, content: string) {
+  const wrapper = document.createElement('div');
+  
+  if (role === 'user') {
+    wrapper.className = 'flex justify-end';
+    wrapper.innerHTML = `
+      <div class="bg-accent/15 border border-accent/20 rounded-2xl rounded-tr-sm px-4 py-3 max-w-sm">
+        <p class="text-sm leading-relaxed">${content}</p>
+      </div>`;
+  } else {
+    wrapper.className = 'flex gap-3 items-start';
+    wrapper.innerHTML = `
+      <img src="/profile.png" alt="Hadi" class="w-7 h-7 rounded-full object-cover flex-shrink-0 mt-0.5" />
+      <div class="bg-muted/10 rounded-2xl rounded-tl-sm px-4 py-3 max-w-sm">
+        <p class="text-sm leading-relaxed">${content.replace(/\n/g, '<br>')}</p>
+      </div>`;
+  }
+  
+  chatMessages.appendChild(wrapper);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+async function sendMessage(userMessage: string) {
+  if (!userMessage.trim()) return;
+  
+  addMessage('user', userMessage);
+  messagesHistory.push({ role: 'user', content: userMessage });
+  
+  chatInput.value = '';
+  chatInput.style.height = 'auto';
+  typingIndicator.classList.remove('hidden');
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+  sendBtn.setAttribute('disabled', 'true');
+
+  try {
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${GROQ_API_KEY}`
+      },
+      body: JSON.stringify({
+        model: MODEL,
+        messages: [
+          { role: 'system', content: SYSTEM_PROMPT },
+          ...messagesHistory
+        ],
+        max_tokens: 500,
+        temperature: 0.85
+      })
+    });
+
+    const data = await response.json();
+    const reply = data.choices[0].message.content;
+    
+    messagesHistory.push({ role: 'assistant', content: reply });
+    typingIndicator.classList.add('hidden');
+    addMessage('assistant', reply);
+  } catch (error) {
+    typingIndicator.classList.add('hidden');
+    addMessage('assistant', "Something broke. Probably the internet. Try again.");
+  }
+  
+  sendBtn.removeAttribute('disabled');
+}
+
+sendBtn?.addEventListener('click', () => sendMessage(chatInput.value));
+
+chatInput?.addEventListener('keydown', (e: KeyboardEvent) => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage(chatInput.value);
+  }
+});
+
+chatInput?.addEventListener('input', () => {
+  chatInput.style.height = 'auto';
+  chatInput.style.height = chatInput.scrollHeight + 'px';
+});
+
+document.querySelectorAll('.suggested-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const q = btn.getAttribute('data-question');
+    if (q) sendMessage(q);
+  });
+});
+</script>

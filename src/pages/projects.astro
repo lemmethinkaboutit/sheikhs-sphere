@@ -1,0 +1,91 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+
+const meta = {
+	description: "Case studies and projects from real work across marketing, brand building, and ServiceNow platform implementation.",
+	title: "Projects",
+};
+
+const projects = [
+	{
+		slug: "acme-spm",
+		title: "Acme Corporation: ServiceNow SPM Implementation",
+		category: "ServiceNow · Strategic Portfolio Management",
+		date: "May 2026",
+		status: "Complete",
+		description: "End-to-end SPM implementation on a PDI. Five phases. $1.55M portfolio. 17 users. 9 role-based groups. One executive dashboard that answers the question every CEO is actually asking.",
+		tags: ["ServiceNow", "SPM", "Demand Governance", "RBAC", "Portfolio Management"],
+		live: true,
+	},
+	{
+		slug: null,
+		title: "Nightswear Brand",
+		category: "Brand & Marketing Strategy",
+		date: "2024",
+		status: "Case Study Coming",
+		description: "Built a brand from scratch — positioning, visual identity, digital presence, and go-to-market strategy for a Pakistani nightswear label.",
+		tags: ["Branding", "Digital Marketing", "Strategy"],
+		live: false,
+	},
+	{
+		slug: null,
+		title: "Halal Organics",
+		category: "Go-to-Market Strategy",
+		date: "In Planning",
+		status: "Coming Soon",
+		description: "Brand positioning and launch strategy for a halal organic products business targeting health-conscious consumers in Pakistan.",
+		tags: ["Strategy", "Brand Development", "Market Research"],
+		live: false,
+	},
+];
+---
+
+<PageLayout meta={meta}>
+	<h1 class="title mb-4">Projects</h1>
+	<p class="text-muted mb-16 text-sm">Real work. Real deliverables. No fluff.</p>
+
+	<div class="space-y-6">
+		{projects.map((project) => (
+			<div class={`rounded-xl border p-6 transition-all duration-200 ${!project.live ? 'opacity-50 border-dashed border-muted/30' : 'border-muted/20 hover:border-accent cursor-pointer'}`}>
+				{project.live ? (
+					<a href={`/${project.slug}`} class="block group">
+						<div class="flex items-start justify-between gap-4 mb-3">
+							<div>
+								<span class="text-xs text-muted uppercase tracking-widest">{project.category} · {project.date}</span>
+								<h2 class="text-base font-bold mt-1 group-hover:text-accent transition-colors">{project.title}</h2>
+							</div>
+							<span class="text-xs px-2 py-1 rounded-full bg-accent/15 text-accent border border-accent/20 flex-shrink-0">{project.status}</span>
+						</div>
+						<p class="text-sm text-muted leading-relaxed mb-4">{project.description}</p>
+						<div class="flex flex-wrap gap-2 mb-4">
+							{project.tags.map(tag => (
+								<span class="text-xs px-2 py-0.5 rounded border border-muted/20 text-muted">{tag}</span>
+							))}
+						</div>
+						<p class="text-xs text-accent group-hover:underline">Read case study →</p>
+					</a>
+				) : (
+					<div>
+						<div class="flex items-start justify-between gap-4 mb-3">
+							<div>
+								<span class="text-xs text-muted uppercase tracking-widest">{project.category} · {project.date}</span>
+								<h2 class="text-base font-bold mt-1">{project.title}</h2>
+							</div>
+							<span class="text-xs px-2 py-1 rounded-full bg-muted/10 text-muted border border-muted/20 flex-shrink-0">{project.status}</span>
+						</div>
+						<p class="text-sm text-muted leading-relaxed mb-4">{project.description}</p>
+						<div class="flex flex-wrap gap-2">
+							{project.tags.map(tag => (
+								<span class="text-xs px-2 py-0.5 rounded border border-muted/20 text-muted">{tag}</span>
+							))}
+						</div>
+					</div>
+				)}
+			</div>
+		))}
+	</div>
+
+	<p class="text-muted text-xs mt-16 pt-8 border-t border-dashed">
+		More projects documented as work progresses.
+	</p>
+</PageLayout>
