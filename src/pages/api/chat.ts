@@ -4,8 +4,8 @@ import type { APIRoute } from 'astro';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const CF_ACCOUNT_ID = import.meta.env.CF_ACCOUNT_ID;
-    const CF_API_TOKEN = import.meta.env.CF_API_TOKEN;
+    const CF_ACCOUNT_ID = process.env.CF_ACCOUNT_ID;
+    const CF_API_TOKEN = process.env.CF_API_TOKEN;
     const MODEL = "@cf/meta/llama-3.1-8b-instruct";
 
     if (!CF_ACCOUNT_ID || !CF_API_TOKEN) {
