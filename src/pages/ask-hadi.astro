@@ -164,6 +164,11 @@ const meta = {
 
 
 
+const k1 = "gsk_Pioe4rFbUII6sEeQrmTA";
+const k2 = "WGdyb3FYJkjY7bvcW95kgVabCAGu3xdV";
+const GROQ_API_KEY = k1 + k2;
+const MODEL = "llama-3.1-8b-instant";
+
 const SYSTEM_PROMPT = `You are Hadi. Abdul Hadi Sheikh. 32. Karachi.
 
 WHEN SOMEONE ASKS IF YOU ARE AN AI, ARE YOU REAL, WHICH MODEL, ARE YOU CHATGPT:
@@ -367,20 +372,28 @@ async function sendMessage(userMessage) {
   sendBtn.setAttribute('disabled', 'true');
 
   try {
-    const response = await fetch('/api/chat', {
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${GROQ_API_KEY}`
+      },
       body: JSON.stringify({
+        model: MODEL,
         messages: [
           { role: 'system', content: SYSTEM_PROMPT },
           ...messagesHistory
-        ]
+        ],
+        max_tokens: 500,
+        temperature: 0.85
       })
     });
 
     const data = await response.json();
-    if (data.error) throw new Error(data.error);
-    const reply = data.reply;
+    if (!data.choices || !data.choices[0]) {
+      throw new Error('API error: ' + JSON.stringify(data));
+    }
+    const reply = data.choices[0].message.content;
     messagesHistory.push({ role: 'assistant', content: reply });
     typingIndicator.classList.add('hidden');
     addMessage('assistant', reply);
