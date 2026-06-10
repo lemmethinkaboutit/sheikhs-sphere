@@ -1,0 +1,127 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+
+const meta = {
+	description:
+		"ServiceNow SPM & IRM implementation, marketing strategy, and sales enablement. Consulting and project work by Abdul Hadi Sheikh, CSA & CIS-SPM certified.",
+	title: "Services",
+};
+
+const CONTACT_EMAIL = "magic.alive11@gmail.com";
+
+const services = [
+	{
+		title: "ServiceNow SPM Implementation",
+		category: "Strategic Portfolio Management",
+		description:
+			"End-to-end SPM setup: demand intake and scoring, portfolio and program structure, role-based access, financial tracking, and the executive dashboard that answers \"are we on track to meet our goals.\" Built on governance first, configuration second.",
+		goodFit:
+			"You have projects running in spreadsheets, demand arriving from every direction, and leadership asking for visibility nobody can produce.",
+		proof: { label: "Read the Acme SPM case study →", href: "/acme-spm" },
+		tags: ["Demand Governance", "Portfolio Setup", "Executive Dashboards", "RBAC"],
+		credential: "CIS-SPM certified",
+	},
+	{
+		title: "ServiceNow IRM",
+		category: "Integrated Risk Management",
+		description:
+			"Risk and compliance made visible and manageable: risk register setup, policy and compliance management, indicators, and reporting that gets risk out of spreadsheets and in front of the people who own it.",
+		goodFit:
+			"Your risk register is a spreadsheet someone updates before audits, and compliance evidence is scattered across inboxes.",
+		proof: null,
+		tags: ["Risk Register", "Policy & Compliance", "GRC", "Reporting"],
+		credential: "IRM certification in progress",
+	},
+	{
+		title: "Marketing Strategy",
+		category: "Positioning · Email · SEO",
+		description:
+			"Strategy grounded in five years of doing the work — not just planning it. Brand positioning, email campaigns that get opened, SEO that targets what buyers actually search, and go-to-market plans tied to business outcomes instead of vanity metrics.",
+		goodFit:
+			"You're spending on marketing but can't trace it to revenue, or you're launching something and need positioning that survives contact with real customers.",
+		proof: { label: "Read how I learned this the hard way →", href: "/posts/cementing-my-future/" },
+		tags: ["Positioning", "Email Marketing", "SEO", "Go-to-Market"],
+		credential: "MBA Marketing · Google certified",
+	},
+	{
+		title: "Sales Enablement",
+		category: "Outreach · Pipeline Process",
+		description:
+			"Outreach scripts, qualification frameworks, and pipeline process built by someone who has personally made the cold calls and heard every objection. I help teams stop pitching and start listening — and build the process around that.",
+		goodFit:
+			"Your team is making calls and sending emails but conversations aren't converting, and nobody can say why.",
+		proof: { label: "Read my PhD in rejection →", href: "/posts/cold-calling-karachi/" },
+		tags: ["Cold Outreach", "Sales Process", "Qualification", "Objection Handling"],
+		credential: "5 years field experience",
+	},
+];
+---
+
+<PageLayout meta={meta}>
+	<h1 class="title mb-4">Services</h1>
+	<p class="text-muted mb-4 text-sm">
+		Consulting and project work across ServiceNow and revenue. Remote-friendly. Scoped engagements, clear deliverables.
+	</p>
+	<p class="mb-16 text-sm">
+		Not sure which fits? <a href={`mailto:${CONTACT_EMAIL}`} class="text-accent hover:underline">Email me</a> with the problem — I'll tell you honestly if I'm the right person for it.
+	</p>
+
+	<div class="space-y-6">
+		{services.map((service) => (
+			<div class="rounded-xl border border-muted/20 p-6 transition-all duration-200 hover:border-accent">
+				<div class="flex items-start justify-between gap-4 mb-3">
+					<div>
+						<span class="text-xs text-muted uppercase tracking-widest">{service.category}</span>
+						<h2 class="text-base font-bold mt-1">{service.title}</h2>
+					</div>
+					<span class="text-xs px-2 py-1 rounded-full bg-accent/15 text-accent border border-accent/20 flex-shrink-0">{service.credential}</span>
+				</div>
+				<p class="text-sm text-muted leading-relaxed mb-4">{service.description}</p>
+				<p class="text-sm leading-relaxed mb-4">
+					<span class="font-semibold text-accent">Good fit if:</span>
+					<span class="text-muted"> {service.goodFit}</span>
+				</p>
+				<div class="flex flex-wrap gap-2 mb-4">
+					{service.tags.map((tag) => (
+						<span class="text-xs px-2 py-0.5 rounded border border-muted/20 text-muted">{tag}</span>
+					))}
+				</div>
+				<div class="flex flex-wrap items-center gap-4">
+					<a
+						href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(service.title)}`}
+						class="text-xs px-3 py-1.5 rounded-lg bg-accent/15 text-accent border border-accent/30 hover:bg-accent/25 transition-colors font-semibold"
+					>
+						Start a conversation →
+					</a>
+					{service.proof && (
+						<a href={service.proof.href} class="text-xs text-accent hover:underline">{service.proof.label}</a>
+					)}
+				</div>
+			</div>
+		))}
+	</div>
+
+	<div class="mt-16 pt-8 border-t border-dashed border-muted/30">
+		<h2 class="title text-lg text-accent mb-4">How an engagement starts</h2>
+		<ol class="space-y-3 text-sm">
+			<li class="flex gap-4">
+				<span class="flex-shrink-0 w-6 h-6 rounded-full border border-accent/30 flex items-center justify-center text-accent text-xs">1</span>
+				<span class="text-muted">You email me the problem — a few honest sentences, no brief required.</span>
+			</li>
+			<li class="flex gap-4">
+				<span class="flex-shrink-0 w-6 h-6 rounded-full border border-accent/30 flex items-center justify-center text-accent text-xs">2</span>
+				<span class="text-muted">We get on a call. I ask questions, you decide if I understand your situation.</span>
+			</li>
+			<li class="flex gap-4">
+				<span class="flex-shrink-0 w-6 h-6 rounded-full border border-accent/30 flex items-center justify-center text-accent text-xs">3</span>
+				<span class="text-muted">You get a written scope with deliverables and a price. No surprises after that.</span>
+			</li>
+		</ol>
+		<a
+			href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Project inquiry")}`}
+			class="inline-block mt-8 text-sm px-5 py-2.5 rounded-lg bg-accent/15 text-accent border border-accent/30 hover:bg-accent/25 transition-colors font-semibold"
+		>
+			Email me about a project →
+		</a>
+	</div>
+</PageLayout>

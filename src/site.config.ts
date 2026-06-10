@@ -14,7 +14,7 @@ export const siteConfig: SiteConfig = {
 	// Used as both a meta property (src/components/BaseHead.astro L:31 + L:49) & the generated satori png (src/pages/og-image/[slug].png.ts)
 	author: "Abdul Hadi Sheikh",
 	// Used as the default description meta property and webmanifest description
-	description: "ServiceNow CSA & CIS-SPM certified professional. Five years across sales, marketing, and enterprise platforms. Writing honestly about the journey.",
+	description: "ServiceNow SPM & IRM consultant and marketing strategist. CSA & CIS-SPM certified. I help organizations build portfolio governance, risk visibility, and sales pipelines that work.",
 	// HTML lang property, found in src/layouts/Base.astro L:18 & astro.config.ts L:48
 	lang: "en-GB",
 	// Meta property, found in src/components/BaseHead.astro L:42
@@ -47,6 +47,10 @@ export const menuLinks: { path: string; title: string }[] = [
 	{
 		path: "/projects/",
 		title: "Projects",
+	},
+	{
+		path: "/services/",
+		title: "Services",
 	},
 	{
 		path: "/ask-hadi/",

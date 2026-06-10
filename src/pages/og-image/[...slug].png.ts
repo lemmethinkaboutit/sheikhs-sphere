@@ -7,6 +7,8 @@ import { getAllPosts } from "@/data/post";
 import { getFormattedDate } from "@/utils/date";
 import { ogMarkup } from "./_ogMarkup";
 
+export const prerender = true;
+
 const ogOptions: SatoriOptions = {
 	// debug: true,
 	fonts: [
