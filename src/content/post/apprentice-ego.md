@@ -3,10 +3,10 @@ title: "The Apprentice's Ego: Sometimes the Lesson is What Not to Do"
 description: "What working inside a chaotic agency taught me about quality, standards, and the professional I refused to become."
 publishDate: "01 Nov 2022"
 tags: ["marketing", "career", "agency"]
-ogImage: "/apprentice-ego.png"
+ogImage: "/apprentice-ego-og.jpg"
 ---
 
-![The Apprentice's Ego illustration](/apprentice-ego.png)
+![The Apprentice's Ego illustration](/apprentice-ego.webp)
 
 I walked into my first marketing agency expecting deadlines, research decks, and people who cared deeply about campaign performance.
 

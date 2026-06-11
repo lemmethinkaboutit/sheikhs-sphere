@@ -1,4 +1,5 @@
 ---
+export const prerender = true;
 import PageLayout from "@/layouts/Base.astro";
 
 const meta = {
@@ -17,7 +18,7 @@ const meta = {
 
       <div class="border-b border-muted/20 px-5 py-4 flex items-center gap-3">
         <div class="relative">
-          <img src="/profile.png" alt="Hadi" class="w-9 h-9 rounded-full object-cover" />
+          <img src="/profile.webp" alt="Hadi" class="w-9 h-9 rounded-full object-cover" />
           <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-accent rounded-full border-2 border-global-bg"></span>
         </div>
         <div>
@@ -28,19 +29,19 @@ const meta = {
 
       <div id="chat-messages" class="px-5 py-6 space-y-4 min-h-64 max-h-96 overflow-y-auto">
         <div class="flex gap-3 items-start">
-          <img src="/profile.png" alt="Hadi" class="w-7 h-7 rounded-full object-cover flex-shrink-0 mt-0.5" />
+          <img src="/profile.webp" alt="Hadi" class="w-7 h-7 rounded-full object-cover flex-shrink-0 mt-0.5" />
           <div class="bg-muted/10 rounded-2xl rounded-tl-sm px-4 py-3 max-w-sm">
             <p class="text-sm leading-relaxed">Go on. Click me. I don't bite.</p>
           </div>
         </div>
         <div class="flex gap-3 items-start">
-          <img src="/profile.png" alt="Hadi" class="w-7 h-7 rounded-full object-cover flex-shrink-0 mt-0.5" />
+          <img src="/profile.webp" alt="Hadi" class="w-7 h-7 rounded-full object-cover flex-shrink-0 mt-0.5" />
           <div class="bg-muted/10 rounded-2xl rounded-tl-sm px-4 py-3 max-w-sm">
             <p class="text-sm leading-relaxed">I've been trained with awesome jokes. Which you will never know if you don't ask.</p>
           </div>
         </div>
         <div class="flex gap-3 items-start">
-          <img src="/profile.png" alt="Hadi" class="w-7 h-7 rounded-full object-cover flex-shrink-0 mt-0.5" />
+          <img src="/profile.webp" alt="Hadi" class="w-7 h-7 rounded-full object-cover flex-shrink-0 mt-0.5" />
           <div class="bg-muted/10 rounded-2xl rounded-tl-sm px-4 py-3 max-w-sm">
             <p class="text-sm leading-relaxed">Ask me about ServiceNow, my work history, the Acme case study, why I left cement, or literally anything else. Fair warning — I have opinions.</p>
           </div>
@@ -49,7 +50,7 @@ const meta = {
 
       <div id="typing-indicator" class="hidden px-5 pb-2">
         <div class="flex gap-3 items-center">
-          <img src="/profile.png" alt="Hadi" class="w-7 h-7 rounded-full object-cover flex-shrink-0" />
+          <img src="/profile.webp" alt="Hadi" class="w-7 h-7 rounded-full object-cover flex-shrink-0" />
           <div class="bg-muted/10 rounded-2xl rounded-tl-sm px-4 py-3">
             <div class="flex gap-1 items-center">
               <span class="w-1.5 h-1.5 bg-muted rounded-full animate-bounce" style="animation-delay: 0ms"></span>
@@ -355,7 +356,7 @@ function addMessage(role, content) {
   } else {
     const formatted = linkify(content.replace(/\n/g, '<br>'));
     wrapper.className = 'flex gap-3 items-start';
-    wrapper.innerHTML = `<img src="/profile.png" alt="Hadi" class="w-7 h-7 rounded-full object-cover flex-shrink-0 mt-0.5" /><div class="bg-muted/10 rounded-2xl rounded-tl-sm px-4 py-3 max-w-sm"><p class="text-sm leading-relaxed">${formatted}</p></div>`;
+    wrapper.innerHTML = `<img src="/profile.webp" alt="Hadi" class="w-7 h-7 rounded-full object-cover flex-shrink-0 mt-0.5" /><div class="bg-muted/10 rounded-2xl rounded-tl-sm px-4 py-3 max-w-sm"><p class="text-sm leading-relaxed">${formatted}</p></div>`;
   }
   chatMessages.appendChild(wrapper);
   chatMessages.scrollTop = chatMessages.scrollHeight;

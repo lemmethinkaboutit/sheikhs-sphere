@@ -6,6 +6,8 @@ import { getAllPosts } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
 import { collectionDateSort } from "@/utils/date";
 
+export const prerender = true;
+
 // Posts
 const MAX_POSTS = 10;
 const allPosts = await getAllPosts();
@@ -21,23 +23,26 @@ const pinnedPosts = allPostsByDate
 	.toArray();
 ---
 
-<PageLayout meta={{ title: "Home" }}>
+<PageLayout
+	meta={{
+		title: "Business Process Automation, Change Management & Marketing Consultant",
+		description:
+			"I automate business processes, manage change and projects people actually adopt, and build marketing and sales processes that convert. Warm, honest consulting — wherever you are.",
+	}}
+>
 	<section>
 	<h1 class="title title-gradient mb-3 text-3xl sm:text-4xl">Sheikh's Sphere</h1>
-	<p class="text-muted text-xs mb-10 tracking-widest uppercase">Business Process Automation · ServiceNow SPM &amp; IRM · Marketing &amp; Growth</p>
+	<p class="text-muted text-xs mb-10 tracking-widest uppercase">Business Process Automation · Change &amp; Project Management · Marketing &amp; Sales Process</p>
 	<div class="flex flex-col sm:flex-row items-start gap-8 mb-8">
 		<div class="flex-1">
 			<p class="mb-4">
-				I automate business processes — and unlike most people who do that, I've personally made the cold calls, run the campaigns, and carried the pipeline those processes are supposed to serve.
+				I do three things, and I do them like someone who has actually lived them: I <strong>automate business processes</strong> that drown teams in manual work, I <strong>manage change and projects</strong> so the new way actually sticks, and I <strong>fix marketing and sales processes</strong> so pipelines convert instead of leak.
 			</p>
 			<p class="mb-4">
-				Five years across sales floors, cement factories, and ServiceNow platforms taught me how businesses actually work — not the MBA version, the real one.
-			</p>
-			<p class="mb-4">
-				Today I help organizations automate the work that drags them down: demand intake, portfolio governance, risk and compliance on ServiceNow SPM &amp; IRM — paired with marketing and sales strategy, because automation only matters if it moves revenue. CSA and CIS-SPM certified. Available for consulting and project work.
+				Five years across sales floors, cement factories, and enterprise platforms taught me how businesses actually work — not the MBA version, the real one.
 			</p>
 			<p class="mb-6">
-				This is where I write honestly about the journey.
+				Wherever you are in the world, if your processes live in spreadsheets, your projects stall at adoption, or your pipeline leaks — we should talk. This is also where I write honestly about the journey.
 			</p>
 			<div class="mb-8 flex flex-wrap gap-3">
 				<a href="/services/" class="btn-glow text-xs px-4 py-2 rounded-lg bg-accent/15 text-accent border border-accent/30 hover:bg-accent/25 transition-colors font-semibold">See what I do →</a>
@@ -47,11 +52,24 @@ const pinnedPosts = allPostsByDate
 		</div>
 		<div class="flex-shrink-0">
 			<img
-				src="/profile.png"
+				src="/profile.webp"
 				alt="Abdul Hadi Sheikh"
+				width="320"
+				height="320"
+				fetchpriority="high"
 				class="w-40 h-40 rounded-2xl object-cover border-2 border-accent profile-img"
 			/>
 		</div>
+	</div>
+	<div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-muted border-t border-dashed border-muted/30 pt-4">
+		<span class="uppercase tracking-widest">Credentials</span>
+		<span>MBA Marketing</span>
+		<span aria-hidden="true">·</span>
+		<span>CSA Certified</span>
+		<span aria-hidden="true">·</span>
+		<span>CIS-SPM Certified</span>
+		<span aria-hidden="true">·</span>
+		<span>Google Digital Marketing</span>
 	</div>
 </section>
 

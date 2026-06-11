@@ -3,10 +3,10 @@ title: "SEO is a Lie"
 description: "Four months as an SEO Executive taught me that half of search optimisation is educated guessing and what the other half actually looks like."
 publishDate: "01 Dec 2024"
 tags: ["seo", "career", "digital"]
-ogImage: "/seo-is-a-lie.png"
+ogImage: "/seo-is-a-lie-og.jpg"
 ---
 
-![SEO is a Lie illustration](/seo-is-a-lie.png)
+![SEO is a Lie illustration](/seo-is-a-lie.webp)
 
 Nobody tells you that SEO is mostly waiting.
 
