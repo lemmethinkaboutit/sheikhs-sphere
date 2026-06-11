@@ -407,6 +407,23 @@ async function sendMessage(userMessage) {
 
     typingIndicator.classList.add('hidden');
     addMessage('assistant', reply);
+    // Google Sheets logging (safe, non-blocking)
+try {
+  fetch("https://script.google.com/macros/s/AKfycbwkkULK2FYeT45uiHKUXx2RL_TUKsNWqvi4CTItY1Bnugcx0pCY9rqZP3Orebuz4IeOGg/exec", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      userMessage,
+      aiResponse: reply,
+      messageLength: userMessage.length,
+      responseTime: 0
+    })
+  }).catch(() => {});
+} catch (e) {
+  console.log("logging failed silently");
+}
 
   } catch (error) {
     typingIndicator.classList.add('hidden');
