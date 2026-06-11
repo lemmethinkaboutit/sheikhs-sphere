@@ -323,54 +323,59 @@ Make every conversation feel like it was worth having.
 `;
 
 const messagesHistory = [];
+
 const chatMessages = document.getElementById('chat-messages');
 const chatInput = document.getElementById('chat-input');
 const sendBtn = document.getElementById('send-btn');
 const typingIndicator = document.getElementById('typing-indicator');
 
 function linkify(text) {
-  // Phone numbers
-  text = text.replace(/\+923061107452|03061107452/g, '<a href="tel:+923061107452" class="text-accent underline underline-offset-2 hover:opacity-80 transition-opacity">+92 306 1107452</a>');
-  
-  // Email
-  text = text.replace(/itshadisheikh@hotmail\.com/g, '<a href="mailto:itshadisheikh@hotmail.com" class="text-accent underline underline-offset-2 hover:opacity-80 transition-opacity">itshadisheikh@hotmail.com</a>');
-  
-  // LinkedIn
-  text = text.replace(/linkedin\.com\/in\/call-me-abdul/g, '<a href="https://linkedin.com/in/call-me-abdul" target="_blank" rel="noreferrer" class="text-accent underline underline-offset-2 hover:opacity-80 transition-opacity">linkedin.com/in/call-me-abdul</a>');
-  
-  // General URLs and abdulhadisheikh.com links
-  const urlRegex = /(https?:\/\/(?!linkedin)[^\s<]+|abdulhadisheikh\.com\/[^\s,."'<]+)/g;
+  text = text.replace(/\n/g, '<br>');
+
+  const urlRegex = /(https?:\/\/[^\s<]+|abdulhadisheikh\.com\/[^\s<]+)/g;
+
   text = text.replace(urlRegex, (url) => {
     const href = url.startsWith('http') ? url : 'https://' + url;
-    return `<a href="${href}" target="_blank" rel="noreferrer" class="text-accent underline underline-offset-2 hover:opacity-80 transition-opacity">${url}</a>`;
+    return `<a href="${href}" target="_blank" class="text-accent underline">${url}</a>`;
   });
-  
+
   return text;
 }
 
 function addMessage(role, content) {
   const wrapper = document.createElement('div');
+
   if (role === 'user') {
     wrapper.className = 'flex justify-end';
-    wrapper.innerHTML = `<div class="bg-accent/15 border border-accent/20 rounded-2xl rounded-tr-sm px-4 py-3 max-w-sm"><p class="text-sm leading-relaxed">${content}</p></div>`;
+    wrapper.innerHTML = `
+      <div class="bg-accent/15 border border-accent/20 rounded-2xl rounded-tr-sm px-4 py-3 max-w-sm">
+        <p class="text-sm leading-relaxed">${content}</p>
+      </div>
+    `;
   } else {
-    const formatted = linkify(content.replace(/\n/g, '<br>'));
     wrapper.className = 'flex gap-3 items-start';
-    wrapper.innerHTML = `<img src="/profile.webp" alt="Hadi" class="w-7 h-7 rounded-full object-cover flex-shrink-0 mt-0.5" /><div class="bg-muted/10 rounded-2xl rounded-tl-sm px-4 py-3 max-w-sm"><p class="text-sm leading-relaxed">${formatted}</p></div>`;
+    wrapper.innerHTML = `
+      <img src="/profile.webp" class="w-7 h-7 rounded-full object-cover" />
+      <div class="bg-muted/10 rounded-2xl rounded-tl-sm px-4 py-3 max-w-sm">
+        <p class="text-sm leading-relaxed">${linkify(content)}</p>
+      </div>
+    `;
   }
+
   chatMessages.appendChild(wrapper);
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
 async function sendMessage(userMessage) {
   if (!userMessage.trim()) return;
+
   addMessage('user', userMessage);
-  messagesHistory.push({ role: 'user', content: userMessage });
   chatInput.value = '';
-  chatInput.style.height = 'auto';
+
   typingIndicator.classList.remove('hidden');
-  chatMessages.scrollTop = chatMessages.scrollHeight;
-  sendBtn.setAttribute('disabled', 'true');
+  sendBtn.disabled = true;
+
+  messagesHistory.push({ role: 'user', content: userMessage });
 
   try {
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -391,19 +396,24 @@ async function sendMessage(userMessage) {
     });
 
     const data = await response.json();
+
     if (!data.choices || !data.choices[0]) {
-      throw new Error('API error: ' + JSON.stringify(data));
+      throw new Error('API error');
     }
+
     const reply = data.choices[0].message.content;
+
     messagesHistory.push({ role: 'assistant', content: reply });
+
     typingIndicator.classList.add('hidden');
     addMessage('assistant', reply);
+
   } catch (error) {
     typingIndicator.classList.add('hidden');
     addMessage('assistant', 'Error: ' + error.message);
   }
 
-  sendBtn.removeAttribute('disabled');
+  sendBtn.disabled = false;
 }
 
 sendBtn.addEventListener('click', () => sendMessage(chatInput.value));
@@ -426,6 +436,5 @@ document.querySelectorAll('.suggested-q').forEach(btn => {
     if (q) sendMessage(q);
   });
 });
-</script>
 
-write me the complete code
+</script>
