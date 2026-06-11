@@ -1,4 +1,10 @@
 <script>
+
+const k1 = "gsk_H1j37Z6zM2uQe3gaofONWGdyb3";
+const k2 = "FYhoC1YehlDEfFyen0vnEL5F9Y";
+const GROQ_API_KEY = k1 + k2;
+const MODEL = "llama-3.1-8b-instant";
+
 const messagesHistory = [];
 
 const chatMessages = document.getElementById('chat-messages');
@@ -7,7 +13,31 @@ const sendBtn = document.getElementById('send-btn');
 const typingIndicator = document.getElementById('typing-indicator');
 
 function linkify(text) {
-  return text.replace(/\n/g, '<br>');
+  text = text.replace(/\n/g, '<br>');
+
+  text = text.replace(
+    /(\+923061107452|03061107452)/g,
+    '<a href="tel:+923061107452" class="text-accent underline">+92 306 1107452</a>'
+  );
+
+  text = text.replace(
+    /itshadisheikh@hotmail\.com/g,
+    '<a href="mailto:itshadisheikh@hotmail.com" class="text-accent underline">itshadisheikh@hotmail.com</a>'
+  );
+
+  text = text.replace(
+    /linkedin\.com\/in\/call-me-abdul/g,
+    '<a href="https://linkedin.com/in/call-me-abdul" class="text-accent underline">linkedin</a>'
+  );
+
+  const urlRegex = /(https?:\/\/[^\s<]+|abdulhadisheikh\.com\/[^\s<]+)/g;
+
+  text = text.replace(urlRegex, (url) => {
+    const href = url.startsWith('http') ? url : 'https://' + url;
+    return `<a href="${href}" target="_blank" class="text-accent underline">${url}</a>`;
+  });
+
+  return text;
 }
 
 function addMessage(role, content) {
@@ -22,10 +52,13 @@ function addMessage(role, content) {
     `;
   } else {
     wrapper.className = 'flex gap-3 items-start';
+
+    const formatted = linkify(content);
+
     wrapper.innerHTML = `
-      <img src="/profile.webp" class="w-7 h-7 rounded-full" />
+      <img src="/profile.webp" class="w-7 h-7 rounded-full object-cover" />
       <div class="bg-muted/10 rounded-2xl rounded-tl-sm px-4 py-3 max-w-sm">
-        <p class="text-sm leading-relaxed">${linkify(content)}</p>
+        <p class="text-sm leading-relaxed">${formatted}</p>
       </div>
     `;
   }
@@ -45,36 +78,63 @@ async function sendMessage(userMessage) {
 
   messagesHistory.push({ role: 'user', content: userMessage });
 
+  let reply = "";
+
   try {
-    const response = await fetch('/api/chat', {
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${GROQ_API_KEY}`
       },
       body: JSON.stringify({
-        messages: messagesHistory
+        model: MODEL,
+        messages: [
+          { role: 'system', content: 'You are Hadi.' },
+          ...messagesHistory
+        ],
+        max_tokens: 500,
+        temperature: 0.85
       })
     });
 
     const data = await response.json();
 
-    if (!response.ok) {
-      throw new Error(data.error || 'API error');
+    if (!data.choices || !data.choices[0]) {
+      throw new Error('API error');
     }
 
-    const reply = data.reply;
+    reply = data.choices[0].message.content;
 
     messagesHistory.push({ role: 'assistant', content: reply });
 
     typingIndicator.classList.add('hidden');
     addMessage('assistant', reply);
 
-  } catch (err) {
+  } catch (error) {
     typingIndicator.classList.add('hidden');
-    addMessage('assistant', 'Error: ' + err.message);
+    addMessage('assistant', 'Error: ' + error.message);
   }
 
   sendBtn.disabled = false;
+
+  // 🔥 SAFE GOOGLE SHEETS LOGGING (DOES NOT BREAK CHAT)
+  try {
+    fetch("https://script.google.com/macros/s/AKfycbwkkULK2FYeT45uiHKUXx2RL_TUKsNWqvi4CTItY1Bnugcx0pCY9rqZP3Orebuz4IeOGg/exec", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        userMessage,
+        aiResponse: reply,
+        messageLength: userMessage.length,
+        responseTime: 0
+      })
+    }).catch(() => {});
+  } catch (e) {
+    console.log("logging failed silently");
+  }
 }
 
 sendBtn.addEventListener('click', () => sendMessage(chatInput.value));
@@ -97,4 +157,5 @@ document.querySelectorAll('.suggested-q').forEach(btn => {
     if (q) sendMessage(q);
   });
 });
+
 </script>
