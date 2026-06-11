@@ -1,7 +1,7 @@
 export const prerender = false;
 import type { APIRoute } from 'astro';
 
-// Define the missing model variable
+// Hardcoded Llama model variable to avoid missing reference breaks
 const MODEL = "@cf/meta/llama-3.1-8b-instruct"; 
 
 export const POST: APIRoute = async ({ request }) => {
@@ -9,7 +9,7 @@ export const POST: APIRoute = async ({ request }) => {
     const CF_ACCOUNT_ID = process.env.CF_ACCOUNT_ID;
     const CF_API_TOKEN = process.env.CF_API_TOKEN;
 
-    // Direct Webhook URL 
+    // Direct Google Webhook Link
     const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwkkULK2FYeT45uiHKUXx2RL_TUKsNWqvi4CTItY1Bnugcx0pCY9rqZP3Orebuz4IeOGg/exec";
 
     if (!CF_ACCOUNT_ID || !CF_API_TOKEN) {
@@ -28,7 +28,7 @@ export const POST: APIRoute = async ({ request }) => {
     const userMessage = messages?.[messages.length - 1]?.content || '';
     const startTime = Date.now();
 
-    // 1. Call Cloudflare AI
+    // 1. Send the data payload directly to Cloudflare AI
     const cfResponse = await fetch(
       `https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/ai/run/${MODEL}`,
       {
@@ -60,7 +60,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     const aiResponse = data.result.response;
 
-    // 2. Log to Google Sheets safely from the server side
+    // 2. Safely log everything onto your Google sheet from the server side
     try {
       await fetch(WEBHOOK_URL, {
         method: 'POST',
@@ -78,7 +78,7 @@ export const POST: APIRoute = async ({ request }) => {
       console.error("Google Sheets Logging Webhook error:", err);
     }
 
-    // 3. Return final answer back to frontend
+    // 3. Return response payload smoothly back to front-end UI
     return new Response(JSON.stringify({ reply: aiResponse }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
