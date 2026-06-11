@@ -6,8 +6,7 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     const CF_ACCOUNT_ID = process.env.CF_ACCOUNT_ID;
     const CF_API_TOKEN = process.env.CF_API_TOKEN;
-    const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzwqfZw2S4YaijAluXXdL4KV-ME6g1Qz6ubibj726s7mcNfH3QD_mSTZe5J6UO4LCQwsg/exec";
-    const MODEL = "@cf/meta/llama-3.1-8b-instruct";
+    const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbytEcvUXJeG_vniZI2UFu0NHLKBM9fXXpifj18XR8l_cg5TH3CuKmvzd6uqZ8EccdP2Vg/exec";    const MODEL = "@cf/meta/llama-3.1-8b-instruct";
 
     if (!CF_ACCOUNT_ID || !CF_API_TOKEN) {
       return new Response(JSON.stringify({
