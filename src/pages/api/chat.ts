@@ -1,22 +1,17 @@
 export const prerender = false;
 import type { APIRoute } from 'astro';
 
-// Hardcoded Llama model variable to avoid missing reference breaks
-const MODEL = "@cf/meta/llama-3.1-8b-instruct"; 
+const MODEL = "llama-3.1-8b-instant";
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const CF_ACCOUNT_ID = process.env.CF_ACCOUNT_ID;
-    const CF_API_TOKEN = process.env.CF_API_TOKEN;
+    const GROQ_API_KEY = process.env.GROQ_API_KEY;
 
-    // Direct Google Webhook Link
-  const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycby7jiSZPZKOksG1iMy102-H8evKkwpvezMdFwSi_5u1MWBord3PaffWh4ljmSnLqE1SJw/exec";
-    if (!CF_ACCOUNT_ID || !CF_API_TOKEN) {
-      return new Response(JSON.stringify({
-        error: 'Missing credentials',
-        hasAccountId: !!CF_ACCOUNT_ID,
-        hasToken: !!CF_API_TOKEN
-      }), {
+    // Google Sheets logging webhook
+    const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycby7jiSZPZKOksG1iMy102-H8evKkwpvezMdFwSi_5u1MWBord3PaffWh4ljmSnLqE1SJw/exec";
+
+    if (!GROQ_API_KEY) {
+      return new Response(JSON.stringify({ error: 'Missing credentials' }), {
         status: 500,
         headers: { 'Content-Type': 'application/json' }
       });
@@ -27,29 +22,29 @@ export const POST: APIRoute = async ({ request }) => {
     const userMessage = messages?.[messages.length - 1]?.content || '';
     const startTime = Date.now();
 
-    // 1. Send the data payload directly to Cloudflare AI
-    const cfResponse = await fetch(
-      `https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/ai/run/${MODEL}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${CF_API_TOKEN}`
-        },
-        body: JSON.stringify({
-          messages,
-          max_tokens: 500
-        })
-      }
-    );
+    const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${GROQ_API_KEY}`
+      },
+      body: JSON.stringify({
+        model: MODEL,
+        messages,
+        max_tokens: 500,
+        temperature: 0.85
+      })
+    });
 
-    const data = await cfResponse.json();
+    const data = await groqResponse.json();
     const responseTime = Date.now() - startTime;
 
-    if (!cfResponse.ok || !data.result?.response) {
+    const aiResponse = data.choices?.[0]?.message?.content;
+
+    if (!groqResponse.ok || !aiResponse) {
       return new Response(JSON.stringify({
-        error: 'Cloudflare error',
-        status: cfResponse.status,
+        error: 'AI error',
+        status: groqResponse.status,
         data
       }), {
         status: 500,
@@ -57,15 +52,12 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    const aiResponse = data.result.response;
-
-    // 2. Safely log everything onto your Google sheet from the server side
+    // Log to Google Sheet. Must be awaited: on Vercel serverless the function
+    // freezes as soon as the response returns, so an un-awaited fetch never runs.
     try {
       await fetch(WEBHOOK_URL, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           userMessage,
           aiResponse,
@@ -74,10 +66,9 @@ export const POST: APIRoute = async ({ request }) => {
         })
       });
     } catch (err) {
-      console.error("Google Sheets Logging Webhook error:", err);
+      console.error("Sheets logging error:", err);
     }
 
-    // 3. Return response payload smoothly back to front-end UI
     return new Response(JSON.stringify({ reply: aiResponse }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
