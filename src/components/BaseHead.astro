@@ -141,4 +141,7 @@ const structuredData = {
 	)
 }
 
+{/* Vercel Web Analytics — served by Vercel automatically, no package needed */}
+{import.meta.env.PROD && <script defer is:inline src="/_vercel/insights/script.js" />}
+
 <meta content={Astro.generator} name="generator" />
