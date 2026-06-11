@@ -10,8 +10,7 @@ export const POST: APIRoute = async ({ request }) => {
     const CF_API_TOKEN = process.env.CF_API_TOKEN;
 
     // Direct Google Webhook Link
-    const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwkkULK2FYeT45uiHKUXx2RL_TUKsNWqvi4CTItY1Bnugcx0pCY9rqZP3Orebuz4IeOGg/exec";
-
+  const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycby7jiSZPZKOksG1iMy102-H8evKkwpvezMdFwSi_5u1MWBord3PaffWh4ljmSnLqE1SJw/exec";
     if (!CF_ACCOUNT_ID || !CF_API_TOKEN) {
       return new Response(JSON.stringify({
         error: 'Missing credentials',
