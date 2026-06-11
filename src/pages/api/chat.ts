@@ -6,20 +6,30 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     const CF_ACCOUNT_ID = process.env.CF_ACCOUNT_ID;
     const CF_API_TOKEN = process.env.CF_API_TOKEN;
-    const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyOQl8eBD41Vjm1G3T_h9HmUNGFjk1fQwJCzbk2ywa4ZY7SCcY9uAEKCeySQkjVTbOQPg/exec";
+
+    const WEBHOOK_URL =
+      "https://script.google.com/macros/s/AKfycbwkkULK2FYeT45uiHKUXx2RL_TUKsNWqvi4CTItY1Bnugcx0pCY9rqZP3Orebuz4IeOGg/exec";
+
     if (!CF_ACCOUNT_ID || !CF_API_TOKEN) {
       return new Response(JSON.stringify({
         error: 'Missing credentials',
         hasAccountId: !!CF_ACCOUNT_ID,
         hasToken: !!CF_API_TOKEN
-      }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+      }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
 
     const body = await request.json();
     const { messages } = body;
-    const userMessage = messages[messages.length - 1]?.content || '';
+
+    const userMessage =
+      messages?.[messages.length - 1]?.content || '';
+
     const startTime = Date.now();
 
+    // Call Cloudflare AI
     const cfResponse = await fetch(
       `https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/ai/run/${MODEL}`,
       {
@@ -28,7 +38,10 @@ export const POST: APIRoute = async ({ request }) => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${CF_API_TOKEN}`
         },
-        body: JSON.stringify({ messages, max_tokens: 500 })
+        body: JSON.stringify({
+          messages,
+          max_tokens: 500
+        })
       }
     );
 
@@ -39,30 +52,42 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify({
         error: 'Cloudflare error',
         status: cfResponse.status,
-        data: data
-      }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+        data
+      }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
 
     const aiResponse = data.result.response;
 
-    // Log to Google Sheet (fire and forget)
-    fetch(WEBHOOK_URL, {
-      method: 'POST',
-      body: JSON.stringify({
-        userMessage,
-        aiResponse,
-        messageLength: userMessage.length,
-        responseTime
-      })
-    }).catch(() => {});
+    // 🔥 CRITICAL FIX: wait for webhook properly
+    try {
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          userMessage,
+          aiResponse,
+          messageLength: userMessage.length,
+          responseTime
+        })
+      });
+    } catch (err) {
+      console.error("Webhook error:", err);
+    }
 
     return new Response(JSON.stringify({ reply: aiResponse }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
     });
 
-  } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), {
+  } catch (error: any) {
+    return new Response(JSON.stringify({
+      error: error.message
+    }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
     });
