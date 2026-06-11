@@ -10,7 +10,7 @@ export const POST: APIRoute = async ({ request }) => {
     const MODEL = "@cf/meta/llama-3.1-8b-instruct";
 
     if (!CF_ACCOUNT_ID || !CF_API_TOKEN) {
-      return new Response(JSON.stringify({ 
+      return new Response(JSON.stringify({
         error: 'Missing credentials',
         hasAccountId: !!CF_ACCOUNT_ID,
         hasToken: !!CF_API_TOKEN
@@ -38,7 +38,7 @@ export const POST: APIRoute = async ({ request }) => {
     const responseTime = Date.now() - startTime;
 
     if (!cfResponse.ok || !data.result?.response) {
-      return new Response(JSON.stringify({ 
+      return new Response(JSON.stringify({
         error: 'Cloudflare error',
         status: cfResponse.status,
         data: data
@@ -56,7 +56,7 @@ export const POST: APIRoute = async ({ request }) => {
         messageLength: userMessage.length,
         responseTime
       })
-    }).catch(() => {}); // Silently fail if logging breaks
+    }).catch(() => {});
 
     return new Response(JSON.stringify({ reply: aiResponse }), {
       status: 200,
