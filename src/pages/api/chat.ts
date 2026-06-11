@@ -6,8 +6,7 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     const CF_ACCOUNT_ID = process.env.CF_ACCOUNT_ID;
     const CF_API_TOKEN = process.env.CF_API_TOKEN;
-    const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbytEcvUXJeG_vniZI2UFu0NHLKBM9fXXpifj18XR8l_cg5TH3CuKmvzd6uqZ8EccdP2Vg/exec";    const MODEL = "@cf/meta/llama-3.1-8b-instruct";
-
+    const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyOQl8eBD41Vjm1G3T_h9HmUNGFjk1fQwJCzbk2ywa4ZY7SCcY9uAEKCeySQkjVTbOQPg/exec";
     if (!CF_ACCOUNT_ID || !CF_API_TOKEN) {
       return new Response(JSON.stringify({
         error: 'Missing credentials',
