@@ -3,10 +3,10 @@ title: "Cementing My Future"
 description: "What working at one of Pakistan's largest industrial companies taught me about marketing, trust, and why some products demand presence not campaigns."
 publishDate: "27 Jun 2025"
 tags: ["marketing", "career", "industrial"]
-ogImage: "/cementing-my-future.png"
+ogImage: "/cementing-my-future-og.jpg"
 ---
 
-![Cementing My Future illustration](/cementing-my-future.png)
+![Cementing My Future illustration](/cementing-my-future.webp)
 
 I am standing on a construction site in the middle of a working day explaining to a painter why everything he thinks he knows about this product is wrong.
 

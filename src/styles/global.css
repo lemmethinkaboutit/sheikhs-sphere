@@ -326,6 +326,38 @@
 .lightbox-close:hover {
   opacity: 1;
 }
+/* Certification badges: must beat the `.prose img { width: 100% }` rule above,
+   which otherwise blows badges up to full content width */
+.badge-card {
+  display: inline-flex;
+  flex-shrink: 0;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  border: 1px solid color-mix(in oklch, var(--color-accent) 25%, transparent);
+  background: color-mix(in oklch, var(--color-accent) 8%, transparent);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.badge-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px oklch(65% 0.18 300 / 0.3);
+}
+
+.prose img.badge-img,
+.badge-img {
+  width: 5.5rem;
+  height: 5.5rem;
+  object-fit: contain;
+  cursor: default;
+  border-radius: 0;
+  display: block;
+}
+
+.prose img.badge-img:hover {
+  transform: none;
+  box-shadow: none;
+}
+
 /* Profile image hover */
 .profile-img {
   transition: transform 0.3s ease, box-shadow 0.3s ease;

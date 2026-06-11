@@ -14,14 +14,14 @@ export const siteConfig: SiteConfig = {
 	// Used as both a meta property (src/components/BaseHead.astro L:31 + L:49) & the generated satori png (src/pages/og-image/[slug].png.ts)
 	author: "Abdul Hadi Sheikh",
 	// Used as the default description meta property and webmanifest description
-	description: "Business process automation consultant (ServiceNow SPM & IRM) with a marketer's instincts. CSA & CIS-SPM certified. I build workflows, governance, and pipelines that actually move revenue.",
+	description: "Business process automation, change & project management, and marketing & sales process consulting. I build workflows, governance, and pipelines that actually move revenue — wherever you are.",
 	// HTML lang property, found in src/layouts/Base.astro L:18 & astro.config.ts L:48
-	lang: "en-GB",
+	lang: "en",
 	// Meta property, found in src/components/BaseHead.astro L:42
-	ogLocale: "en_GB",
+	ogLocale: "en_US",
 	// Date.prototype.toLocaleDateString() parameters, found in src/utils/date.ts.
 	date: {
-		locale: "en-GB",
+		locale: "en-US",
 		options: {
 			day: "numeric",
 			month: "short",

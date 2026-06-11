@@ -3,10 +3,10 @@ title: "Spam is Just Unrequited Love"
 description: "Nine months inside a mass email operation taught me the craft, the ethics, and the one rule that makes someone actually open your email."
 publishDate: "01 Mar 2024"
 tags: ["email-marketing", "career", "digital"]
-ogImage: "/spam-unrequited-love.png"
+ogImage: "/spam-unrequited-love-og.jpg"
 ---
 
-![Spam is Just Unrequited Love illustration](/spam-unrequited-love.png)
+![Spam is Just Unrequited Love illustration](/spam-unrequited-love.webp)
 
 Every day I sent emails to people who didn't know I existed.
 Thousands of them. Sometimes tens of thousands. Carefully crafted subject lines. Optimized send times. Warmed up domains. The whole operation running like a quiet, invisible machine — reaching into inboxes across cities, countries, and time zones with offers people may or may not have wanted.

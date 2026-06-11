@@ -3,10 +3,10 @@ title: "Cold Calling in Karachi: My PhD in Rejection"
 description: "What my first sales internship taught me about listening, rejection, and the one skill every business discipline depends on but nobody formally teaches."
 publishDate: "15 Jan 2020"
 tags: ["sales", "career"]
-ogImage: "/cold-calling.png"
+ogImage: "/cold-calling-og.jpg"
 ---
 
-![Cold calling illustration](/cold-calling.png)
+![Cold calling illustration](/cold-calling.webp)
 
 My first call ended before I finished introducing myself.
 

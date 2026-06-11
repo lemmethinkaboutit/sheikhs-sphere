@@ -1,9 +1,12 @@
 ---
 import PageLayout from "@/layouts/Base.astro";
 
+export const prerender = true;
+
 const meta = {
-	description: "Five years across sales, digital marketing, and enterprise platforms. ServiceNow CSA and CIS-SPM certified. Writing honestly about the journey.",
-	title: "About",
+	description:
+		"Business process automation, change and project management, and marketing & sales strategy — learned the hard way across sales floors, factories, and enterprise platforms. MBA, CSA & CIS-SPM certified.",
+	title: "About — Automation, Change & Marketing Consultant",
 };
 ---
 
@@ -15,57 +18,72 @@ const meta = {
 		</p>
 
 		<p>
-			Five years later I've worked across sales, email marketing, SEO, industrial marketing at one of Pakistan's largest cement companies, and now ServiceNow platform implementation. Each role taught me something the previous one didn't. None of them wasted.
+			Five years later I've worked across sales, email marketing, SEO, industrial marketing at one of the largest cement companies in the region, and enterprise platform implementation. Each role taught me something the previous one didn't. None of them wasted. Today that experience comes together in three things: <strong>business process automation</strong>, <strong>change and project management</strong>, and <strong>marketing and sales process design</strong>.
 		</p>
 
 		<hr class="my-8 border-dashed border-border" />
 
 		<section class="mt-8">
-			<h2 class="title text-lg text-accent mb-4">The Business Foundation</h2>
+			<h2 class="title text-lg text-accent mb-4">Business Process Automation</h2>
 			<div class="flex flex-col gap-4 sm:flex-row sm:items-center">
-				<img
-					src="/google-marketing-certification.png"
-					class="h-20 w-20 object-contain"
-					alt="Google Marketing Badge"
-				/>
+				<span class="badge-card not-prose">
+					<img
+						src="/cis-spm.webp"
+						class="badge-img"
+						width="200"
+						height="200"
+						loading="lazy"
+						alt="Certified Implementation Specialist SPM Badge"
+					/>
+				</span>
 				<p class="m-0">
-					MBA in Marketing from Iqra University. Google certified across digital marketing and e-commerce. But honestly — the real education happened on construction sites in Karachi convincing contractors why a product they'd never heard of was worth their trust. No classroom prepares you for that.
+					Manual intake queues, approval chains living in inboxes, status reports assembled by hand — that's the work I automate. I design workflows that route, score, and track work automatically, and dashboards that answer "are we on track?" without anyone compiling a deck. I'm a certified implementation specialist on enterprise work-management platforms, but the platform is the tool, not the point: the point is a process your team stops fighting.
 				</p>
 			</div>
 		</section>
 
 		<section class="mt-12">
-			<h2 class="title text-lg text-accent mb-4">The ServiceNow Layer</h2>
-			<div class="flex flex-col gap-4">
-				<div class="flex gap-4 items-center">
+			<h2 class="title text-lg text-accent mb-4">Change &amp; Project Management</h2>
+			<div class="flex flex-col gap-4 sm:flex-row sm:items-center">
+				<span class="badge-card not-prose">
 					<img
-						src="/cis-spm.png"
-						class="h-20 w-20 object-contain"
-						alt="ServiceNow CIS-SPM Badge"
+						src="/csa.webp"
+						class="badge-img"
+						width="200"
+						height="200"
+						loading="lazy"
+						alt="Certified System Administrator Badge"
 					/>
-					<img
-						src="/csa.png"
-						class="h-20 w-20 object-contain"
-						alt="ServiceNow CSA Badge"
-					/>
-				</div>
+				</span>
 				<p class="m-0">
-					ServiceNow Certified System Administrator. CIS-SPM certified. Currently pursuing IRM. I came to ServiceNow not as a developer looking for a platform but as a business professional looking for a system that could make organizational chaos visible and manageable. SPM does that. So does IRM. That intersection of strategy and structure is where I work.
+					Change management is 90% therapy and 10% technology. Most projects fail not because the plan was wrong but because nobody took the time to understand why people resist change. I've spent five years learning to have that conversation — on cold calls, in factories, in stakeholder meetings — and I run projects the same way: clear governance, visible portfolios, and adoption treated as a deliverable, not an afterthought.
 				</p>
 			</div>
 		</section>
 
 		<section class="mt-12">
-			<h2 class="title text-lg text-accent mb-4">What I Actually Believe</h2>
-			<p class="m-0">
-				Change management is 90% therapy and 10% technology. Most implementations fail not because the platform is wrong but because nobody took the time to understand why people resist change in the first place. I've spent five years learning how to have that conversation — on cold calls, in cement factories, in stakeholder meetings. That experience doesn't disappear when you open a ServiceNow instance. It's the whole point.
-			</p>
+			<h2 class="title text-lg text-accent mb-4">Marketing &amp; Sales Process</h2>
+			<div class="flex flex-col gap-4 sm:flex-row sm:items-center">
+				<span class="badge-card not-prose">
+					<img
+						src="/google-marketing-certification.webp"
+						class="badge-img"
+						width="200"
+						height="200"
+						loading="lazy"
+						alt="Google Digital Marketing Certification Badge"
+					/>
+				</span>
+				<p class="m-0">
+					MBA in Marketing. Google certified across digital marketing and e-commerce. But honestly — the real education happened on construction sites convincing contractors why a product they'd never heard of was worth their trust. I build positioning, email campaigns, SEO, and sales pipelines grounded in that: what buyers actually search, what they actually object to, and what actually converts.
+				</p>
+			</div>
 		</section>
 
 		<section class="mt-12">
 			<h2 class="title text-lg text-accent mb-4">This Site</h2>
 			<p class="m-0">
-				Sheikh's Sphere is where I write honestly about the journey. Not the polished LinkedIn version. The real one — including the jobs that were messy, the lessons that came from failure, and the certifications that made sense of everything that came before them. If you're building something in the ServiceNow space or just figuring out your own path, I hope something here is useful.
+				Sheikh's Sphere is where I write honestly about the journey. Not the polished LinkedIn version. The real one — including the jobs that were messy, the lessons that came from failure, and the certifications that made sense of everything that came before them. If you're automating a process, untangling a project, or fixing a funnel, I hope something here is useful.
 			</p>
 		</section>
 
@@ -74,10 +92,10 @@ const meta = {
 		<section class="mt-8">
 			<h2 class="title text-lg text-accent mb-4">Work With Me</h2>
 			<p class="mb-4">
-				I take on consulting and project work in four areas: ServiceNow SPM implementation (demand governance, portfolio setup, executive dashboards), ServiceNow IRM (risk and compliance), marketing strategy (positioning, email, SEO), and sales enablement (outreach and pipeline process). Remote-friendly, based in Pakistan.
+				I take on consulting and project work across my three domains: business process automation (workflow design, intake and approvals, executive dashboards), change and project management (governance, portfolio visibility, adoption), and marketing and sales process (positioning, email, SEO, outreach and pipeline). Fully remote, and everyone is welcome — wherever you are, bring the problem.
 			</p>
 			<p class="m-0">
-				If you're dealing with a portfolio nobody can see, a risk register living in spreadsheets, or a pipeline that isn't converting — <a href="/services/" class="text-accent hover:underline">see what I do</a> or <a href="mailto:magic.alive11@gmail.com" class="text-accent hover:underline">email me directly</a>. I reply fast.
+				If your processes live in spreadsheets, your projects stall at adoption, or your pipeline isn't converting — <a href="/services/" class="text-accent hover:underline">see what I do</a> or <a href="mailto:magic.alive11@gmail.com" class="text-accent hover:underline">email me directly</a>. I reply fast.
 			</p>
 		</section>
 
