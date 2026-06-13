@@ -26,6 +26,8 @@ The problem isn't the spreadsheet. The problem is that a spreadsheet has no opin
 
 Forget the vendor checklists. Here are the real signals, the ones I look for when someone asks whether they've outgrown their sheet. You don't need all of them. Two or three is usually enough.
 
+![Diagram: five signs your spreadsheet has outgrown itself](/spreadsheet-warning-signs.svg)
+
 **1. Nobody trusts the numbers without asking a human.** The truest test. If the answer to "are we on track?" is "let me check with Sarah" rather than "let me open the sheet," the sheet has stopped being a source of truth. It's become a thing that *represents* the truth that lives in Sarah's head. When Sarah is on leave, you have no process — you have a hostage situation.
 
 **2. Updating it is someone's actual job.** Watch for the person who spends Friday afternoon "cleaning up the tracker." That's not admin overhead — that's the cost of the tool, showing up as a salary. A process should serve the people in it, not employ one of them as its janitor.
