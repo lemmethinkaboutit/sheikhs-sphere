@@ -33,7 +33,9 @@ const tagMeta = await getTagMeta(tag);
 const TagContent = tagMeta ? (await render(tagMeta)).Content : null;
 
 const meta = {
-	description: tagMeta?.data.description ?? `View all posts with the tag - ${tag}`,
+	description:
+		tagMeta?.data.description ??
+		`Every post tagged "${tag}" — practical, honest writing on ${tag} from real consulting and operations experience by Abdul Hadi Sheikh.`,
 	title: tagMeta?.data.title ?? `Posts about ${tag}`,
 };
 
