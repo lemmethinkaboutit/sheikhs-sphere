@@ -42,7 +42,10 @@ If you read those nodding, the sheet has quietly become the bottleneck. The good
 
 Here's the part most "migrate to a platform!" advice skips: the danger isn't staying on spreadsheets too long. It's jumping to a heavy platform too fast, badly, and creating a system *worse* than the sheet you left — because now the chaos has a login screen and a six-figure invoice.
 
-I learned this the expensive way, which is the same thing I wrote about in [why change management is mostly therapy](/posts/change-management-90-percent-therapy/): the tooling is the easy 10%. The 90% is the humans. So move in this order.
+I learned this the expensive way, which is the same thing I wrote about in [why change management is mostly therapy](/posts/change-management-90-percent-therapy/): the tooling is the easy 10%. The 90% is the humans. 
+So move in this order.
+
+![Diagram: the four-step path from spreadsheet to workflow, and a side-by-side of what each costs you](/spreadsheet-to-workflow.svg)
 
 **Step 1 — Map the process the sheet is actually running.** Not the one in the SOP document. The real one. Who creates an item, who has to approve it, what makes it "done," where it gets stuck. The spreadsheet is hiding a workflow inside its columns — find it before you automate it. Automating a broken process just lets you be wrong faster.
 
