@@ -24,6 +24,7 @@ const post = defineCollection({
 				})
 				.optional(),
 			draft: z.boolean().default(false),
+			unlisted: z.boolean().default(false),
 			ogImage: z.string().optional(),
 			tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
 			publishDate: z

@@ -7,6 +7,12 @@ export async function getAllPosts(): Promise<CollectionEntry<"post">[]> {
 	});
 }
 
+/** posts that should appear in browse surfaces (excludes unlisted) */
+export async function getListedPosts(): Promise<CollectionEntry<"post">[]> {
+	const posts = await getAllPosts();
+	return posts.filter((p) => !p.data.unlisted);
+}
+
 /** Get tag metadata by tag name */
 export async function getTagMeta(tag: string): Promise<CollectionEntry<"tag"> | undefined> {
 	const tagEntries = await getCollection("tag", (entry) => {

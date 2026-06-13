@@ -3,6 +3,7 @@ title: "Stop Managing Projects in Spreadsheets"
 description: "Spreadsheets feel free until they cost you a launch. How to tell when a project has outgrown a sheet — and what to move it to without breaking your team."
 publishDate: "13 Jun 2026"
 tags: ["business-process-automation", "project-management", "operations"]
+unlisted: true
 ogImage: "/spreadsheet-chaos-og.jpg"
 ---
 
