@@ -3,10 +3,10 @@ title: "Stop Managing Projects in Spreadsheets"
 description: "Spreadsheets feel free until they cost you a launch. How to tell when a project has outgrown a sheet — and what to move it to without breaking your team."
 publishDate: "13 Jun 2026"
 tags: ["business-process-automation", "project-management", "operations"]
-ogImage: "/spreadsheet-chaos.png"
+ogImage: "/spreadsheet-chaos-og.jpg"
 ---
 
-![Simpsons-style illustration of a man overwhelmed by a chaotic spreadsheet full of tangled arrows and sticky notes](/spreadsheet-chaos.png)
+![Simpsons-style illustration of a man overwhelmed by a chaotic spreadsheet full of tangled arrows and sticky notes](/spreadsheet-chaos.webp)
 
 There's a specific moment I've watched happen in a dozen organizations. Someone opens "the tracker" — the master spreadsheet that runs a launch, a portfolio, a hiring pipeline — and three tabs in, they go quiet. Then: "Wait, which version is this?"
 
